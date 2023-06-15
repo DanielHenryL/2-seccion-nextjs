@@ -1,8 +1,9 @@
 'use client';
+import { GetStaticProps } from 'next';
 import { pokeApi } from '@/api';
+import { Card, Grid, Row, Text } from '@nextui-org/react';
 import { Layout } from '@/components/layouts';
 import { PokemonListResponse, SmallPokemon } from '@/interface';
-import { GetStaticProps } from 'next';
 
  interface Props{
   pokemons:SmallPokemon[];
@@ -12,16 +13,29 @@ export default function HomePage({pokemons}:Props) {
   console.log(pokemons)
   return (
     <Layout title={'Listado de pokemon'}>
-      <ul>
+      <Grid.Container gap={2} justify='flex-start'>
         {
           pokemons.map( ( poke) => (
-            <div key={poke.id}>
-              <li>{poke.id} - {poke.name}</li>
-              <img src={poke.image} alt="Imagen pokemon" width={150} height={150}/>
-            </div>
+            <Grid xs={6} sm={3} md={2} xl={1} key={poke.id}>
+              <Card isHoverable isPressable>
+                <Card.Body css={{ p:1 }}>
+                  <Card.Image 
+                    src={poke.image}
+                    width={"100%"}
+                    height={140}
+                  />
+                  <Card.Footer>
+                    <Row justify='space-between'>
+                      <Text transform='capitalize'>{ poke.name }</Text>
+                      <Text>#{ poke.id }</Text>
+                    </Row>
+                  </Card.Footer>
+                </Card.Body>
+              </Card>
+            </Grid>
           ))
         }
-      </ul>
+      </Grid.Container>
     </Layout>
   )
 }
