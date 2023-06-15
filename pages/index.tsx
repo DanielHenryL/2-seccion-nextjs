@@ -3,14 +3,7 @@ import { pokeApi } from '@/api';
 import { Layout } from '@/components/layouts';
 import { PokemonListResponse, SmallPokemon } from '@/interface';
 import { GetStaticProps } from 'next';
-// import { Inter } from 'next/font/google'
 
-
-// import type { InferGetStaticPropsType, GetStaticProps } from 'next'
-// type Repo = {
-//   name: string
-//   stargazers_count: number
-// }
  interface Props{
   pokemons:SmallPokemon[];
  }
