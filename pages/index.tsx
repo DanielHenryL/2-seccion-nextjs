@@ -11,7 +11,6 @@ import { PokemonCard } from '@/components/pokemon';
  }
 
 export default function HomePage({pokemons}:Props) {
-  console.log(pokemons)
   return (
     <Layout title={'Listado de pokemon'}>
       <Grid.Container gap={2} justify='flex-start'>
