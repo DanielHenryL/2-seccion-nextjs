@@ -11,7 +11,7 @@ interface Props{
 }
 
 export default function PokemonPage({pokemon}:Props) {
-  const [isInFavorites, setIsInFavorites] = useState( localFavorites.isVerificated(pokemon.id) )
+  const [isInFavorites, setIsInFavorites] = useState( localFavorites.isVerificated( pokemon.id ) )
 
   const onToggleFavorite = () => {
     localFavorites.toggleFavorite( pokemon.id );
@@ -43,7 +43,7 @@ export default function PokemonPage({pokemon}:Props) {
                 ghost
                 onPress={onToggleFavorite}
               >
-                {isInFavorites? 'Quitar de favoritos': 'Guardar en favoritos'}
+                { isInFavorites ? 'Quitar de favoritos': 'Guardar en favoritos'}
               </Button>
             </Card.Header>
             <Card.Body>

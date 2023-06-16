@@ -11,12 +11,17 @@ const toggleFavorite = (id:number) => {
 }   
 
 const isVerificated = ( id:number ):boolean => {
-    if(typeof window === 'undefined') return false;
+    if( typeof window === 'undefined' ) return false;
     let favorites: number[] = JSON.parse(localStorage.getItem('favorites') || '[]');
     return favorites.includes( id )
 }
 
+const pokemons = ():number[] => {
+    return JSON.parse( localStorage.getItem('favorites') || '[]')
+}
+
 export default {
     toggleFavorite,
-    isVerificated
+    isVerificated,
+    pokemons
 }
