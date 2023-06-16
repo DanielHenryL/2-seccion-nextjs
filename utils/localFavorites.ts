@@ -9,6 +9,14 @@ const toggleFavorite = (id:number) => {
     }
     localStorage.setItem('favorites', JSON.stringify( favorites ))
 }   
+
+const isVerificated = ( id:number ):boolean => {
+    if(typeof window === 'undefined') return false;
+    let favorites: number[] = JSON.parse(localStorage.getItem('favorites') || '[]');
+    return favorites.includes( id )
+}
+
 export default {
     toggleFavorite,
+    isVerificated
 }
