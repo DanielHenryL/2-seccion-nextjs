@@ -22,7 +22,7 @@ export const Navbar = () => {
                 height={70}
             />
             <NextLink href={'/'} passHref legacyBehavior>
-                <Link>
+                <Link >
                     <Text color="white" h2>P</Text>
                     <Text color="white" h3>okémon</Text>
                 </Link>
