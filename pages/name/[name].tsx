@@ -6,6 +6,7 @@ import { Button, Card, Container, Grid, Text,Image } from "@nextui-org/react"
 import { useEffect, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { pokeApi } from "@/api";
+import { getPokemonInfo } from "@/utils/getPokemonInfo";
 interface Props{
     pokemon:Pokemon;
   }
@@ -104,25 +105,28 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
       paths: pokemonNames.map(( name )=> ({
         params: { name }
       })),
-      fallback: false
+      fallback: 'blocking'
     }
   }
   
   export const getStaticProps: GetStaticProps = async ({params}) => {
     const {name} = params as { name:string};
   
-    const {data} = await pokeApi.get<Pokemon>(`/pokemon/${name}`)
-    
-    const pokemon = {
-        id:data.id,
-        name:data.name,
-        sprites:data.sprites
-    }
+    const pokemon = await getPokemonInfo( name )
 
+    if( !pokemon ){
+        return {
+            redirect:{
+                destination:'/',
+                permanent:false
+            }
+        }
+    }
     return {
       props: { 
         pokemon
-      } 
+      },
+      revalidate:86400
     }
   }
 
