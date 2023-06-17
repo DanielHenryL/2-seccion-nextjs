@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GetStaticProps, GetStaticPaths } from "next"
 import { Button, Card, Container, Grid, Image, Text } from "@nextui-org/react";
 import conffeti from 'canvas-confetti'
@@ -12,7 +12,7 @@ interface Props{
 }
 
 export default function PokemonPage({pokemon}:Props) {
-  const [isInFavorites, setIsInFavorites] = useState( localFavorites.isVerificated( pokemon.id ) )
+  const [isInFavorites, setIsInFavorites] = useState( false )
 
   const onToggleFavorite = () => {
     localFavorites.toggleFavorite( pokemon.id );
@@ -33,7 +33,9 @@ export default function PokemonPage({pokemon}:Props) {
       })
     }
   }
-  
+  useEffect(() => {
+    setIsInFavorites(localFavorites.isVerificated( pokemon.id ))
+  }, [])
   
   return (
     <Layout title={pokemon.name}>
